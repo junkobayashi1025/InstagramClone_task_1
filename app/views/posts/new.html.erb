@@ -5,19 +5,21 @@
         投稿画面
       </div>
       <div class="card-body">
-        <%= form_for @post, html: { multipart: true, class: "upload-images p-0 border-0" } do |f| %>
-          <div class="form-group row mt-2">
-            <div class="col-auto pr-0">
+        <%= form_with model: @post, class: "upload-images p-0 border-0" do |f| %>
+         <div class ="form-group row mt-2">
+            <div class ="col-auto pr-0">
               <%= image_tag avatar_url(current_user), class: "post-profile-icon" %>
-            </div>
-            <div class="col pl-0">
+             </div>
+             <div class ="col pl-0">
               <%= f.text_field :caption, class: "form-control border-0", placeholder: "キャプションを書く" %>
-            </div>
+             </div>
+         </div>
+         <div class ="mb-3">
+            <%= f.fields_for :photos do |i| %>
+              <%= i.file_field :image %>
+            <% end %>
           </div>
-          <div class="mb-3">
-            <%= file_field_tag "images[]", type: :file, multiple: false, accept: 'image/jpeg,image/gif,image/png', id: "post_image" %>
-          </div>
-          <%= f.submit "投稿する", class: "btn btn-primary" %>
+           <%= f.submit "投稿する", class:"btn btn-primary" %>
         <% end %>
       </div>
     </div>
