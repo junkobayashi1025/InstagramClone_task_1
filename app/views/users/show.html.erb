@@ -22,7 +22,7 @@
                 </button>
               </div>
               <div class="list-group text-center">
-                <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: "list-group-item list-group-item-action" %>
+                <%= link_to "ログアウト", session_path(@user.id), method: :delete, class: "list-group-item list-group-item-action" %>
                 <%= link_to "キャンセル", "#", class: "list-group-item list-group-item-action", "data-dismiss": "modal" %>
               </div>
             </div>

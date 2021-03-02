@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :current_user?, only: [:show]
+  # before_action :current_user?, only: [:show]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  def index
+   @users = User.all.order(created_at: :desc)
+  end
 
   def new
     @user = User.new
@@ -14,10 +19,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user.id)
+      flash[:success] = "ユーザー「#{@user.name}」を更新しました"
+    end
+  end
+
   def show
   end
 
+  def destroy
+    if @user.destroy
+    redirect_to users_path
+    flash[:danger] = "ユーザー「#{@user.name}」を削除しました"
+    end
+  end
+
   private
+  def set_user
+   @user = User.find(params[:id])
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
@@ -27,7 +50,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user != current_user
     flash[:danger] = "閲覧権限がありません"
-    redirect_to user_path(@current_user)
+    redirect_to users_path
     end
   end
+
 end
