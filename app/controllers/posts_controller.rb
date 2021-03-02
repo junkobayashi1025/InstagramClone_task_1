@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
+  before_action :set_post, only: [:show, :destroy]
 
   def index
     @posts = Post.all.includes(:photos, :user).order(created_at: :desc)
@@ -24,13 +25,25 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+  end
 
+  def destroy
+    if @post.user == current_user
+      if @post.destroy
+        flash[:notice] = '投稿が削除されました'
+      end
+    else
+      flash[:danger] = '投稿の削除に失敗しました'
+    end
   end
 
   private
   def post_params
     params.require(:post).permit(:caption, photos_attributes:[:image]).merge(user_id: current_user.id)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
 end
