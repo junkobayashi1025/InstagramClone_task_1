@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   private
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
   def current_user?
     @user = User.find(params[:id])
     if @user != current_user
-    flash[:notice] = "閲覧権限がありません"
+    flash[:danger] = "閲覧権限がありません"
     redirect_to user_path(@current_user)
     end
   end
