@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :current_user?, only: [:show]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :current_user?, only: [:show]
 
   def index
    @users = User.all.order(created_at: :desc)
@@ -13,6 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
      render :new

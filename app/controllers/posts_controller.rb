@@ -16,10 +16,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.photos.present?
       @post.save
-      redirect_to user_path(@post.user.id)
+      redirect_to posts_path
       flash[:success] = '投稿が保存されました'
     else
-      redirect_to post_path(@post.id)
+      redirect_to posts_path
       flash[:danger] = '投稿に失敗しました'
     end
   end
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
     else
       flash[:danger] = '投稿の削除に失敗しました'
     end
+    redirect_to user_path(@post.user.id)
   end
 
   private
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
   end
 
 end
