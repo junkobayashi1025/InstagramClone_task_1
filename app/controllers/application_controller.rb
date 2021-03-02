@@ -3,7 +3,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   private
-  def login_required
-    redirect_to new_session_path unless current_user
+  def authenticate_user
+    if current_user == nil
+      flash[:notice] = "ログインが必要です！"
+      redirect_to new_session_path
+    end
   end
 end

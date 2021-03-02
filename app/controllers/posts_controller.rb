@@ -1,4 +1,11 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user
+
+  def index
+    @posts = Post.all.includes(:photos, :user).order(created_at: :desc)
+
+  end
+
   def new
     @post = Post.new
     @post.photos.build
@@ -8,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.photos.present?
       @post.save
-      redirect_to post_path(@post.id)
+      redirect_to user_path(@post.user.id)
       flash[:success] = '投稿が保存されました'
     else
       redirect_to post_path(@post.id)
