@@ -14,6 +14,10 @@
           <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
             <div class="delete-post-icon">
             </div>
+            <% end %>
+          <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
+            <div class="delete-post-icon">
+            </div>
           <% end %>
           <% end %>
         </div>
@@ -29,7 +33,7 @@
                 <%= link_to "いいね", post_likes_path(post), method: :POST, remote: true, class: "love hide-text" %>
               <% end %>
             </div>
-            <%= link_to "", "#", class:"comment" %>
+            <%= link_to "", post_path(post), class:"comment" %>
           </div>
           <div id="like-text-post-<%= post.id.to_s %>">
             <%= render "like_text", { likes: post.likes } %>
@@ -39,17 +43,22 @@
             <span><%= post.caption %></span>
             <%= link_to time_ago_in_words(post.created_at).upcase + "前",
             post_path(post), class: "post-time no-text-decoration" %>
-             <hr>
-             <div class =" row parts">
-               <form action ="#" class ="w-100">
-                 <div>
-                    <textarea class =" form-control comment-input border-0" placeholder =" コメント..." rows =" 1"></textarea>
-                  </div>
-                </form>
-              </div>
-             </div>
-            </div>
+          <div id ="comment-post-<%= post.id.to_s %>">
+             <%= render 'comment_list', { post: post } %>
           </div>
+          <%= link_to time_ago_in_words(post.created_at).upcase + "前",
+           post_path(post), class: "light-color post-time no-text-decoration" %>
+          <hr>
+          <div class ="row actions" id ="comment-form-post-<%= post.id.to_s %>">
+             <%= form_with model: [post, Comment.new], class: "w-100" do |f| %>
+               <%= f.hidden_field :user_id, value: current_user.id %>
+               <%= f.hidden_field :post_id, value: post.id %>
+               <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
+             <% end %>
+          </div>
+         </div>
         </div>
+       </div>
       </div>
-    <% end %>
+     </div>
+  <% end %>

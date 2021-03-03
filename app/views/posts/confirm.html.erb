@@ -2,10 +2,10 @@
   <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
     <div class="card">
       <div class="card-header">
-        投稿画面
+        投稿内容の確認
       </div>
       <div class="card-body">
-        <%= form_with model: @post, local: true, url: confirm_posts_path, class: "upload-images p-0 border-0" do |f| %>
+        <%= form_with model: @post, local: true, url: choose_new_or_edit, class: "upload-images p-0 border-0" do |f| %>
          <div class ="form-group row mt-2">
             <div class ="col-auto pr-0">
               <%= image_tag avatar_url(current_user), class: "post-profile-icon" %>
@@ -14,13 +14,15 @@
               <%= f.text_field :caption, class: "form-control border-0", placeholder: "キャプションを書く" %>
              </div>
          </div>
-         <div class ="mb-3">
-            <%= f.fields_for :photos do |i| %>
-            <%= i.file_field :image %>
-            <%= i.hidden_field :image_cache %>
-            <% end %>
-          </div>
-           <%= f.submit "確認", class:"btn btn-primary" %>
+         <div class="card-left">
+           <%= image_tag @post.photos.first.image.url(:medium), class: "card-img-top" %>
+         </div>
+         <%= f.fields_for :photos do |i| %>
+         <%= i.hidden_field :image_cache %>
+          <% end %>
+           <hr>
+          <%= f.submit "戻る", name: "back", class:"btn btn-primary" %>
+          <%= f.submit "投稿", class:"btn btn-primary" %>
         <% end %>
       </div>
     </div>

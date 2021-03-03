@@ -78,7 +78,7 @@
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
-  background-size: 20px!important;
+  background-size: 20px !important;
   color: #262626;
   font-size: 20px;
 }
@@ -88,7 +88,7 @@
   background-repeat: no-repeat;
   height: 36px;
   width: 36px;
-  background-size: 36px!important;
+  background-size: 36px !important;
 }
 
 .hide-text {
@@ -96,4 +96,14 @@
    overflow: hidden;
    text-indent: 110%;
    white-space: nowrap;
+}
+
+.delete-comment {
+  background-image: image-url("parts8");
+  background-repeat: no-repeat;
+  width: 11px;
+  height: 11px;
+  float: right;
+  margin: 5px 0 0 10px;
+  background-size: 11px !important;
 }
