@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_post, only: [:show, :edit, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all.includes(:photos, :user).order(created_at: :desc)
@@ -40,12 +40,19 @@ class PostsController < ApplicationController
   end
 
   def update
+   if @post.update(post_params)
+      redirect_to posts_path
+      flash[:notice] = "コメントを変更しました"
+   else
+      render :edit
+      flash[:danger] = "コメントを変更できませんでした"
+    end
   end
 
   def destroy
     if @post.user == current_user
       if @post.destroy
-        flash[:notice] = '投稿が削除されました'
+        flash[:success] = '投稿が削除されました'
       end
     else
       flash[:danger] = '投稿の削除に失敗しました'

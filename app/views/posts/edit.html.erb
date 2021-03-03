@@ -1,0 +1,27 @@
+<div class="d-flex flex-column align-items-center mt-3">
+  <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
+    <div class="card">
+      <div class="card-header">
+        編集画面
+      </div>
+      <div class="card-body">
+        <%= form_with model: @post, local: true, class: "upload-images p-0 border-0" do |f| %>
+         <div class ="form-group row mt-2">
+            <div class ="col-auto pr-0">
+              <%= image_tag avatar_url(current_user), class: "post-profile-icon" %>
+             </div>
+             <div class ="col pl-0">
+              <%= f.text_field :caption, class: "form-control border-0", placeholder: "キャプションを書く" %>
+             </div>
+         </div>
+         <div class="card-left">
+           <%= image_tag @post.photos.first.image.url(:medium), class: "card-img-top" %>
+         </div>
+          <hr>
+         <%= f.submit "戻る", name: "back", class:"btn btn-primary" %>
+         <%= f.submit "変更", class:"btn btn-primary" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

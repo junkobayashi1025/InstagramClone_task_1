@@ -34,7 +34,7 @@
   background-image: image-url("parts6");
   background-repeat: no-repeat;
   height: 36px; width: 36px;
-  background-size: 40px !important;
+  background-size: 36px !important;
 }
 
 .post-time {
@@ -75,6 +75,16 @@
 
 .delete-post-icon {
   background-image: image-url("parts9");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px !important;
+  color: #262626;
+  font-size: 20px;
+}
+
+.edit-post-icon {
+  background-image: image-url("parts10");
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
