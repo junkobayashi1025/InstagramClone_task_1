@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :favorite]
   before_action :current_user?, only: [:show]
 
   def index
@@ -34,6 +35,10 @@ class UsersController < ApplicationController
     redirect_to users_path
     flash[:danger] = "ユーザー「#{@user.name}」を削除しました"
     end
+  end
+
+  def favorite
+    @likes = @user.like_posts
   end
 
   private

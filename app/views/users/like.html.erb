@@ -1,8 +1,0 @@
-<% @likes.each do |like| %>
-　<div>
-    <%= link_to "#{like.user.name}さんの投稿", user_path(like.user.id), class:"user_link" %>
-  </div>
-  <div>
-    <%= link_to image_tag(like.image.url, class: "image_tag image_favorite"), like_path(like.id) %>
-  </div>
-<% end %>
