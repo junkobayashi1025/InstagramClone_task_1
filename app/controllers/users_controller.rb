@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :current_user?, only: [:show]
+  before_action :authenticate_user, only: [:index]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :current_user?, only: [:edit]
 
   def index
    @users = User.all.order(created_at: :desc)
@@ -27,13 +29,21 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+  end
+
+  def edit
   end
 
   def destroy
     if @user.destroy
-    redirect_to users_path
+    redirect_to new_session_path
     flash[:danger] = "ユーザー「#{@user.name}」を削除しました"
     end
+  end
+
+  def favorite
+    @likes = @user.like_posts
   end
 
   private

@@ -1,0 +1,6 @@
+<h1>投稿が完了しました！</h1>
+<h4>ユーザーname: <%= @post.user.name %></h4>
+<h4>ユーザーemail: <%= @post.user.email %></h4>
+<h4>投稿内容の確認</h4>
+<p>img: <%= image_tag @post.photos.first.image.url(:medium) %></p>
+<p>caption: <%= @post.caption %></p>

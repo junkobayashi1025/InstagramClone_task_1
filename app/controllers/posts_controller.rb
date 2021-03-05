@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     else
       if @post.photos.present?
         @post.save
+        ContactMailer.contact_mail(@post).deliver
         redirect_to posts_path
         flash[:success] = '投稿が保存されました'
       else
@@ -40,13 +41,17 @@ class PostsController < ApplicationController
   end
 
   def update
-   if @post.update(post_params)
-      redirect_to posts_path
-      flash[:notice] = "コメントを変更しました"
+   if params[:back]
+     redirect_to post_path(@post)
    else
-      render :edit
-      flash[:danger] = "コメントを変更できませんでした"
-    end
+     if @post.update(post_params)
+        flash[:notice] = "コメントを変更しました"
+     else
+        render :edit
+        flash[:danger] = "コメントを変更できませんでした"
+      end
+        redirect_to post_path(@post)
+     end
   end
 
   def destroy

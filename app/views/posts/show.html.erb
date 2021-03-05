@@ -16,13 +16,29 @@
               title: @post.user.name do %>
               <strong><%= @post.user.name %></strong>
             <% end %>
-            <% if @post.user_id == current_user.id %>
-            <%= link_to post_path(@post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
-              <div class="delete-post-icon">
-              </div>
-            <% end %>
-            <% end %>
-          </div>
+              <% if @post.user_id == current_user.id %>
+              <%= link_to edit_post_path(@post), class: "ml-auto mx-0 my-auto" do %>
+                <div class="">
+                </div>
+              <% end %>
+              <%= link_to edit_post_path(@post), class: "ml-auto mx-0 my-auto" do %>
+                <div class="">
+                </div>
+              <% end %>
+              <%= link_to edit_post_path(@post), class: "ml-auto mx-0 my-auto" do %>
+                <div class="">
+                </div>
+              <% end %>
+              <%= link_to edit_post_path(@post), class: "ml-auto mx-0 my-auto" do %>
+                <div class="edit-post-icon">
+                </div>
+              <% end %>
+              <%= link_to post_path(@post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
+                <div class="delete-post-icon">
+                </div>
+              <% end %>
+              <% end %>
+            </div>
             <div class="m-2">
               <strong><%= @post.caption %></strong>
             </div>
