@@ -1,0 +1,21 @@
+<% @likes.each do |like| %>
+  <div class="col-md-8 col-md-2 mx-auto">
+    <div class="card-wrap">
+      <div class="card">
+        <div class="card-header align-items-center d-flex">
+          <%= link_to user_path(like.user), class: "no-text-decoration" do %>
+          <%= image_tag like.user.profile_photo.url, class: "post-profile-icon" %>
+          <% end %>
+          <%= link_to user_path(like.user), class: "black-color no-text-decoration",
+            title: like.user.name do %>
+            <strong><%= like.user.name %></strong>
+          <% end %>
+        </div>
+        <%= link_to post_path(like) do %>
+        <%= image_tag like.photos.first.image.url(:medium), class: "card-img-top" %>
+        <% end %>
+      </div>
+     </div>
+    </div>
+ <% end %>
+    
