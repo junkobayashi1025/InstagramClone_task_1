@@ -1,5 +1,3 @@
-require 'faker'
-
 50.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
