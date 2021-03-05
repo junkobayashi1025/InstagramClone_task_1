@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     else
       if @post.photos.present?
         @post.save
+        ContactMailer.contact_mail(@post).deliver
         redirect_to posts_path
         flash[:success] = '投稿が保存されました'
       else
